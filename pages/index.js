@@ -5,26 +5,31 @@ import logo from '../public/logo.png'
 
 export default function Home() {
 
-	const [ typewriterText, setTypewriterText ] = React.useState('')
-	const [ typewriterActive, setTypewriterActive ] = React.useState(false)
-
 	const textOptions = [
+		'self consciously aware',
 		'i\'m glad you\'re here',
 		'thank you for being here',
-		'some days, i wish i could take it all back'
+		'some days, i wish i could take it all back',
+		'trans rights = human rights'
 	]
+
+	const [ typewriterText, setTypewriterText ] = React.useState(textOptions[0])
+	const [ typewriterActive, setTypewriterActive ] = React.useState(true)
+
+	const newRandomNumber = () => {
+		return Math.floor(Math.random() * (textOptions.length))
+	}
 
 	const resetText = () => {
 		setTypewriterActive(false)
 
 		setTimeout(() => {
-			let randomNumber = Math.floor(Math.random() * (textOptions.length))
+			let randomNumber = newRandomNumber()
+			while (textOptions[randomNumber] == typewriterText) {randomNumber = newRandomNumber()} // Guarantees a different string
 			setTypewriterText(textOptions[randomNumber])
 			setTypewriterActive(true)
 		}, 1000)
 	}
-
-	React.useMemo(resetText, [true])
 
 	return (
 		<div style={{height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
@@ -32,7 +37,7 @@ export default function Home() {
 				<title>Self Consciously Aware</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<div className='logo-container'>
+			<div className='logo-container' onClick={resetText} >
 				<Image className='logo' src={logo} />
 			</div>
 			<div className='typewriter'>
