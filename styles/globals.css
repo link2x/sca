@@ -27,7 +27,7 @@ a {
 }
 
 .logo-container {
-  height: 20%;
+  height: 11em;
   aspect-ratio: 1/1;
   position: 'relative';
 }
