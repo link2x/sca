@@ -69,15 +69,15 @@ export default function Home() {
 				<title>Self Consciously Aware</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<div className='logo-container' onClick={resetText} >
-				<Image className='logo' src={logo} />
+			<div className='logo-container' onClick={resetText}>
+				<Image className='logo' src={logo} alt='Self Consciously Aware Logo' />
 			</div>
 			<div className='typewriter'>
 				<p id={typewriterActive ? 'write' : null} onClick={resetText} >{typewriterText}</p>
 			</div>
 			<div className='footer'>
 				<span>
-					you're here early. more soon.<br />
+					you&apos;re here early. more soon.<br />
 					2022 SCA
 				</span>
 			</div>
