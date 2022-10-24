@@ -84,8 +84,9 @@ a {
 
 .circle-item {
 	position: absolute;
-	transition: background-color 1s;
+	transition: background-color 1s, border-radius 0.25s;
 	/* transition: width 0.25s, translate 0.25s; */
+	z-index: -3;
 	width: 12%;
 	max-width: 30%;
 	translate: -6% -6%;
@@ -105,31 +106,37 @@ a {
 .circle-item:nth-child(2) {
 	left: 88%;
 	top: 20%;
+	rotate: 60deg;
 }
 
 .circle-item:nth-child(3) {
 	left: 88%;
 	top: 70%;
+	rotate: 120deg;
 }
 
 .circle-item:nth-child(4) {
 	left: 44.5%;
 	top: 94.5%;
+	rotate: 180deg;
 }
 
 .circle-item:nth-child(5) {
 	left: 1.5%;
 	top: 69.5%;
+	rotate: 240deg;
 }
 
 .circle-item:nth-child(6) {
 	left: 1.5%;
 	top: 19.5%;
+	rotate: 300deg;
 }
 
 .circle-item:hover,
 .circle-item:focus {
 	background-color: currentColor;
+	border-radius: 5%;
 	/* width: 30%;
 	translate: -30% -30%; */
 }
