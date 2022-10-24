@@ -1,8 +1,9 @@
 html,
 body {
-	height: 100%;
+	overflow: hidden;
 	padding: 0;
 	margin: 0;
+	width: 100vw;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
 		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -29,14 +30,111 @@ a {
 	}
 }
 
+.main {
+	overflow: hidden;
+	font-size: clamp( 0.7rem, 2vw, 1rem);
+	height: 95vh;
+	display: flex;
+	width: 100vw;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
 .logo-container {
-	height: 11em;
+	width: 11em;
 	aspect-ratio: 1/1;
 	position: 'relative';
 }
 
+.logo {
+	min-width: 0 !important;
+	margin: 0 auto;
+	object-fit: cover;
+	object-position: center;
+	transition: width 1s;
+	z-index: -1;
+	animation:
+		typing 2s cubic-bezier(.73,0,.82,.57) 0.5s forwards;
+}
+
+.bg {
+	position: absolute;
+	overflow: hidden;
+	inset: 0;
+}
+
+.bg-circle {
+	opacity: 0.2;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	translate: -50% -50%;
+	width: 50%;
+	aspect-ratio: 1/1;
+	/* z-index: 1; */
+	border: 1px solid currentColor;
+	border-radius: 100%;
+	animation: rotate 30s linear infinite;
+}
+
+#pause {
+	animation-play-state: paused;
+}
+
+.circle-item {
+	position: absolute;
+	transition: background-color 1s;
+	/* transition: width 0.25s, translate 0.25s; */
+	width: 12%;
+	max-width: 30%;
+	translate: -6% -6%;
+	aspect-ratio: 1/1;
+	border: 0.1em solid currentColor;
+	border-radius: 50%;
+	overflow: hidden;
+	text-align: center;
+	padding-top: 3%;
+}
+
+.circle-item:nth-child(1) {
+	left: 45%;
+	top: -5%;
+}
+
+.circle-item:nth-child(2) {
+	left: 88%;
+	top: 20%;
+}
+
+.circle-item:nth-child(3) {
+	left: 88%;
+	top: 70%;
+}
+
+.circle-item:nth-child(4) {
+	left: 44.5%;
+	top: 94.5%;
+}
+
+.circle-item:nth-child(5) {
+	left: 1.5%;
+	top: 69.5%;
+}
+
+.circle-item:nth-child(6) {
+	left: 1.5%;
+	top: 19.5%;
+}
+
+.circle-item:hover,
+.circle-item:focus {
+	background-color: currentColor;
+	/* width: 30%;
+	translate: -30% -30%; */
+}
+
 .footer {
-	font-size: clamp( 0.7em, 2vw, 1em);
 	position:absolute;
 	bottom: 0;
 	opacity: 20%;
@@ -48,7 +146,6 @@ a {
 	margin-top: clamp( 0.5em, auto, 1em);
 	transition: all 1s;
 	opacity: 0;
-	font-size: clamp( 0.7em, 2vw, 1em);
 	overflow: hidden; /* Ensures the content is not revealed until the animation */
 	border-right: .1em solid currentColor; /* The typwriter cursor */
 	white-space: nowrap; /* Keeps the content on a single line */
@@ -76,4 +173,14 @@ a {
 @keyframes blink-caret {
 	from, to { border-color: transparent }
 	50% { border-color: currentColor; }
+}
+
+@keyframes rotate {
+	0% { rotate: 0deg; }
+	100% { rotate: 360deg; }
+}
+
+@keyframes counter-rotate {
+	0% { rotate: 0deg; }
+	100% { rotate: -360deg; }
 }

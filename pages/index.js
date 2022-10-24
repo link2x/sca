@@ -47,28 +47,68 @@ export default function Home() {
 
 	const [ typewriterText, setTypewriterText ] = React.useState(textOptions[0])
 	const [ typewriterActive, setTypewriterActive ] = React.useState(true)
+	const [ spinActive, setSpinActive ] = React.useState(true)
+
+	const setText = (newText) => {
+		setTypewriterActive(false)
+		setTimeout(() => {
+			setTypewriterText(newText)
+			setTypewriterActive(true)
+		}, 1000)
+	}
 
 	const newRandomNumber = () => {
 		return Math.floor(Math.random() * (textOptions.length))
 	}
 
 	const resetText = () => {
-		setTypewriterActive(false)
-
-		setTimeout(() => {
-			let randomNumber = newRandomNumber()
+		let randomNumber = newRandomNumber()
 			while (textOptions[randomNumber] == typewriterText) {randomNumber = newRandomNumber()} // Guarantees a different string
-			setTypewriterText(textOptions[randomNumber])
-			setTypewriterActive(true)
-		}, 1000)
+			setText(textOptions[randomNumber])
+	}
+
+	const pauseAnimation = (newText = '') => {
+		if ((newText) && (typewriterText != newText)) {
+			setText(newText)
+		}
+		setSpinActive(false)
+	}
+
+	const unpauseAnimation = () => {
+		setSpinActive(true)
+		resetText()
+	}
+
+	const CircleItem = (props) => {
+		return(
+			<div className='circle-item'
+				tabIndex='0'
+				onMouseEnter={() => {pauseAnimation(props.newText)}}
+				onFocus={() => {pauseAnimation(props.newText)}}
+				onMouseLeave={unpauseAnimation}
+				onBlur={unpauseAnimation}
+				>
+					{props?.children}
+			</div>
+		)
 	}
 
 	return (
-		<div style={{height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+		<div className='main'>
 			<Head>
 				<title>Self Consciously Aware</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+			<div className='bg'>
+				<div className='bg-circle' id={spinActive ? null : 'pause'}>
+					<CircleItem newText={'1 - i hope you understand / selfish'} />
+					<CircleItem newText={'2 - it\'s not getting better'} />
+					<CircleItem newText={'3 - waste your time'} />
+					<CircleItem newText={'4 - mos'} />
+					<CircleItem newText={'5 - falter'} />
+					<CircleItem newText={'6 - to rest'} />
+				</div>
+			</div>
 			<div className='logo-container' onClick={resetText}>
 				<Image className='logo' src={logo} alt='Self Consciously Aware Logo' />
 			</div>
